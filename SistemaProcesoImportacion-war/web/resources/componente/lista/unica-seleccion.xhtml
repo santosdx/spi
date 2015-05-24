@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface componentType="ListaUnicaSeleccion">
+        <cc:attribute name="label" required="true" shortDescription="Atributo que describe la etiqueta para la lista."/>        
+        <cc:attribute name="habilitarTest" required="true" shortDescription="Atributo que habilita los componentes de pruebas para la implementación."/>
+        <cc:attribute name="bean" required="true" type="com.nerv.demo.componente.lista.UnicaSeleccion" shortDescription="Objeto que contiene la información necesaria para la funcionalidad de la implementación"/>              
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <p:growl id="growlUnicaSeleccion" life="2000" showDetail="true" rendered="#{cc.attrs.habilitarTest}"/>
+            <p:panel style="border: none; padding:0px;">
+                <h:panelGrid columns="2" >
+                    <p:outputLabel value="#{cc.attrs.label}" styleClass="etiquetaLista"/>
+                    <p:selectOneMenu value="#{cc.attrs.bean.objSeleccion}" converter="unicaSeleccionConverter">                                                
+                        <f:attribute name="beanClass" value="#{cc.attrs.bean}" />                        
+                        <f:selectItem itemLabel="Seleccione un item"/>
+                        <f:selectItems value="#{cc.attrs.bean.lista}" var="item" itemValue="#{item}" itemLabel="#{item.label}" />
+                        <f:ajax listener="#{cc.attrs.bean.seleccionListener}" event="change" render="lblResultado"  rendered="#{cc.attrs.habilitarTest}"/>
+                    </p:selectOneMenu>                
+                </h:panelGrid>
+                <h:panelGrid columns="3" rendered="#{cc.attrs.habilitarTest}">        
+                    <p:outputLabel styleClass="etiquetaLista"/>                        
+                    <p:commandButton value="Test" update="lblResultado,growlUnicaSeleccion" actionListener="#{cc.attrs.bean.validarSeleccion}"/>
+                    <p:outputLabel id="lblResultado" value="#{cc.attrs.bean.objSeleccion.id} -#{cc.attrs.bean.objSeleccion.label}" />                        
+                </h:panelGrid>                             
+            </p:panel>                                    
+        </h:form>
+    </cc:implementation>
+</html>

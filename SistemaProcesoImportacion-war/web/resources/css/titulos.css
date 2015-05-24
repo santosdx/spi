@@ -1,0 +1,111 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23/05/2015, 02:05:18 PM
+    Author     : santosdx
+*/
+/* Titulo de tamaño H1*/
+.titulo-left-h1{
+    width: 100%;
+    text-align: left;
+    display: block;
+    font-size: 2em!important;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold; 
+}
+.titulo-right-h1{
+    width: 100%;
+    text-align: right;
+    display: block;
+    font-size: 2em!important;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;   
+}
+.titulo-center-h1{
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 2em!important;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;  
+}
+/* Titulo de tamaño H2*/
+.titulo-left-h2{
+    width: 100%;
+    text-align: left;
+    display: block;
+    font-size: 1.5em!important;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;  
+}
+.titulo-right-h2{
+    width: 100%;
+    text-align: right;
+    display: block;
+    font-size: 1.5em!important;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+.titulo-center-h2{
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 1.5em!important;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold; 
+}
+/* Titulo de tamaño H3*/
+.titulo-left-h3{
+    width: 100%;
+    text-align: left;
+    display: block;
+    font-size: 1.17em!important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold; 
+}
+.titulo-right-h3{
+    width: 100%;
+    text-align: right;
+    display: block;
+    font-size: 1.17em!important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+.titulo-center-h3{
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 1.17em!important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}

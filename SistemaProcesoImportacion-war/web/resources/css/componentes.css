@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23/05/2015, 02:05:18 PM
+    Author     : santosdx
+*/
+
+.etiquetaLista{
+    display: block;
+    width: 140px;
+    text-align: right;
+    padding-right: 10px;
+}
