@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:bradiel="http://java.sun.com/jsf/composite/componente/demo"
+      xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet library="css" name="general.css" />
+                <h:outputStylesheet library="css" name="componentes.css" />
+                <title>Practica Componentes</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <ui:include src="interfaz/usuario/componente/cpt-acceso-sistema.xhtml"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200" header="Ménu" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Recursos">
+                            <p:menuitem value="Administrar Usuario" url="interfaz/usuario/itz-administrar-usuario.xhtml" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <p:growl id="growl" life="2000" showDetail="true" sticky="true"/>
+                        <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboCarnes}" habilitarTest="true"/>
+                        <p:commandButton value="Validar Datos" actionListener="#{practica.consultarDato()}" update="growl"/>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    Pie Pagina
+                </p:layoutUnit>
+                
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

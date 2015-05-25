@@ -9,9 +9,10 @@
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
                 <p:outputLabel value="Pagina Principal" styleClass="titulo-right-h2"/>
-                <p:outputLabel value="#{request.contextPath} -" />
+                <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/>
+                <!--p:outputLabel value="#{request.contextPath} -" />
                 <p:outputLabel value="#{root} -"/>
-                <p:outputLabel value="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}"/>
+                <p:outputLabel value="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}"/-->
             </ui:define>
         </ui:composition>
    </h:body>

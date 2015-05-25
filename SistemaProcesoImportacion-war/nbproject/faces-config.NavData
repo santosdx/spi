@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="interfaz/usuario/itz-administrar-usuario.xhtml" x="525" y="418" zoom="true"/>
+        <Node id="plantilla/menu.xhtml" x="10" y="425" zoom="true"/>
+        <Node id="interfaz/usuario/componente/cpt-formulario-usuario.xhtml" x="22" y="69" zoom="true"/>
+        <Node id="resources/componente/lista/unica-seleccion.xhtml" x="1066" y="9" zoom="true"/>
+        <Node id="plantilla/encabezado.xhtml" x="10" y="393" zoom="true"/>
+        <Node id="plantilla/plantilla-2.xhtml" x="8" y="518" zoom="true"/>
+        <Node id="interfaz/modulo-a/ventana/vta-lista.xhtml" x="599" y="43" zoom="true"/>
+        <Node id="plantilla/plantilla.xhtml" x="8" y="486" zoom="true"/>
+        <Node id="plantilla/pie-pagina.xhtml" x="9" y="456" zoom="true"/>
+        <Node id="interfaz/modulo-a/itz-modulo-a.xhtml" x="1106" y="425" zoom="true"/>
+        <Node id="index.xhtml" x="689" y="193" zoom="true"/>
+        <Node id="interfaz/usuario/ventana/vta-acceso-sistema.xhtml" x="22" y="98" zoom="true"/>
+        <Node id="interfaz/usuario/componente/cpt-acceso-sistema.xhtml" x="721" y="335" zoom="true"/>
+        <Node id="interfaz/modulo-b/itz-modulo-b.xhtml" x="1083" y="242" zoom="false"/>
+        <Node id="index-original.xhtml" x="652" y="162" zoom="true"/>
+        <Node id="interfaz/usuario/componente/cpt-lista-usuario.xhtml" x="23" y="11" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
