@@ -14,3 +14,9 @@ and open the template in the editor.
     text-align: right;
     padding-right: 10px;
 }
+
+.etiquetaFormulario{
+    display: block;
+    text-align: right;
+    padding-right: 10px;
+}

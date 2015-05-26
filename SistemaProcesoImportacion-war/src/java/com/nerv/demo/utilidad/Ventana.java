@@ -15,7 +15,7 @@ public class Ventana implements Serializable{
  
     /**
      * Método que permite visualizar un componente en una ventana modal.
-     * @param view 
+     * @param componente 
      */
     public void visualizarVentana(String componente) {
         RequestContext.getCurrentInstance().openDialog(componente);
