@@ -7,18 +7,19 @@
     xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
     <h:body>   
         <ui:composition template="/plantilla/plantilla.xhtml">
+            <ui:param name="ccFormUsuarioId" value="formCptFormUsuario:ccFormUsuarioId" />
+            <ui:param name="ccLstUsuarioId" value="formCptListUsuario:ccLstUsuarioId" />
             <ui:define name="content">
+
                 <p:outputLabel value="Administrar Usuario" styleClass="titulo-right-h2"/>
 
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-6">                                
+                        <div class="ui-grid-col-6" style="padding-left: 14px; padding-right: 7px;">                                
                             <ui:include src="componente/cpt-formulario-usuario.xhtml"/>
                         </div>
-                        <div class="ui-grid-col-6">                                
+                        <div class="ui-grid-col-6" style="padding-left: 14px; padding-right: 14px;">                                
                             <ui:include src="componente/cpt-lista-usuario.xhtml"/>
-                            <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/>
-                            <p:commandButton value="Ventana" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('/interfaz/modulo-a/ventana/vta-lista',false,true,false,200,300)}"/>                                
                         </div>
                     </div>
                 </div>

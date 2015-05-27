@@ -19,4 +19,12 @@ and open the template in the editor.
     display: block;
     text-align: right;
     padding-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;    
+}
+
+.cajaPiePagina{
+    font-size: 0.8em;
+    margin: 0px!important;
+    padding: 0px!important;
 }

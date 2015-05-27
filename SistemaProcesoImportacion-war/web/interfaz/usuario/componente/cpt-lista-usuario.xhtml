@@ -5,10 +5,18 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<p:outputLabel value="Lista de Usuarios" styleClass="titulo-center-h3"/>
-<p:dataList value="#{practica.cboCarnes}" var="item" type="ordered" >
-    <p:outputLabel value="#{item.objSeleccion.id}"/>
-    <p:outputLabel value="#{item.objSeleccion.label}"/>      
-</p:dataList>
-    
+    <!--p:outputLabel value="Lista de Usuarios" styleClass="titulo-center-h3"/-->
+    <h:form id="formCptListUsuario">
+        <p:dataList id="ccLstUsuarioId" value="#{MbAdministrarUsuario.listaUsuarios}" var="usuario" paginatorPosition="bottom"
+                    type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+            <f:facet name="header">
+            Lista de Usuarios
+            </f:facet>
+            <p:commandLink update="#{ccFormUsuarioId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                <f:setPropertyActionListener value="#{usuario}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" />
+            </p:commandLink>        
+            <p:outputLabel value="#{usuario.nombres} "/>
+            <p:outputLabel value="#{usuario.apellidos}"/>      
+        </p:dataList>
+    </h:form>
 </ui:composition>

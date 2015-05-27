@@ -7,7 +7,13 @@
     <h:body>   
         <ui:composition>   
         <center>
-            <h:outputText value="#{nerv['footer.copyright']} V.(#{aplicacionPrincipal.sistemaInfo.version})" />
+            <p:panel style="border: none; padding:0px;">
+                <h:panelGrid columns="1" >
+                    <h:outputText value="#{aplicacionPrincipal.sistemaInfo.sistema} V.(#{aplicacionPrincipal.sistemaInfo.version})" style="text-align: center; width: 100%; display: block;"/>
+                    <h:outputText value="#{nerv['footer.copyright']}" style="text-align: center; width: 100%; display: block;"/>                    
+                </h:panelGrid>            
+            </p:panel>
+            
         </center>
         </ui:composition>
     </h:body>
