@@ -1,7 +1,7 @@
-package com.nerv.demo.componente.lista;
+package com.nerv.sai.componente.lista;
 
-import com.nerv.demo.dto.ObjListaUnicaSeleccion;
-import com.nerv.demo.utilidad.Mensaje;
+import com.nerv.sai.dto.ObjListaUnicaSeleccion;
+import com.nerv.sai.utilidad.Mensaje;
 import java.util.List;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;

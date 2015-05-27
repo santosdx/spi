@@ -1,7 +1,7 @@
-package com.nerv.demo.bean;
+package com.nerv.sai.bean;
 
-import com.nerv.demo.componente.lista.UnicaSeleccion;
-import com.nerv.demo.dto.ObjListaUnicaSeleccion;
+import com.nerv.sai.componente.lista.UnicaSeleccion;
+import com.nerv.sai.dto.ObjListaUnicaSeleccion;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

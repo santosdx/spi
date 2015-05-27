@@ -1,4 +1,4 @@
-package com.nerv.demo.dto;
+package com.nerv.sai.dto;
 
 /**
  * Clase que representa un objeto para el componente de UnicaSeleccion.

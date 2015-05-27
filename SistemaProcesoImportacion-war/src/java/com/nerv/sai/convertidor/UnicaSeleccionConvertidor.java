@@ -1,7 +1,7 @@
-package com.nerv.demo.convertidor;
+package com.nerv.sai.convertidor;
 
-import com.nerv.demo.componente.lista.UnicaSeleccion;
-import com.nerv.demo.dto.ObjListaUnicaSeleccion;
+import com.nerv.sai.componente.lista.UnicaSeleccion;
+import com.nerv.sai.dto.ObjListaUnicaSeleccion;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

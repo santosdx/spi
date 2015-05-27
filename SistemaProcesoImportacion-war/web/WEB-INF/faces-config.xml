@@ -5,7 +5,7 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 <application> 
     <resource-bundle>
-        <base-name>com.nerv.demo.sistema</base-name>
+        <base-name>com.nerv.main.sistema</base-name>
         <var>nerv</var>
      </resource-bundle>
     <action-listener>org.primefaces.application.DialogActionListener</action-listener>
