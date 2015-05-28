@@ -5,12 +5,13 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
-    <h:body>   
-        <ui:composition template="./../../plantilla/plantilla.xhtml">
-            <ui:define name="content">
-                <p:outputLabel value="Administrar Permisos" styleClass="titulo-right-h2"/>
-                <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/>
-            </ui:define>
-        </ui:composition>
-   </h:body>
+<h:body>   
+    <ui:composition template="/plantilla/plantilla.xhtml">
+        <ui:define name="content">
+            
+            <p:outputLabel value="Administrar Permisos" styleClass="titulo-right-h2"/>
+ 
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

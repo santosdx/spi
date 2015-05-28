@@ -10,7 +10,7 @@
         <p:dataList id="ccLstUsuarioId" value="#{MbAdministrarUsuario.listaUsuarios}" var="usuario" paginatorPosition="bottom"
                     type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
             <f:facet name="header">
-            Lista de Usuarios
+                <p:outputLabel value="Lista de Usuarios" style="display: block; width: 100%; text-align: left;"/>
             </f:facet>
             <p:commandLink update="#{ccFormUsuarioId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
                 <f:setPropertyActionListener value="#{usuario}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" />

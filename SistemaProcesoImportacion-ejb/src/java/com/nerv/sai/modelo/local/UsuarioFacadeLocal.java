@@ -25,4 +25,5 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
+    public Usuario buscarUsuarioByNickname(String nickname);
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,29 +30,40 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    public static final String FINE_BYE_NICKNAME = "Usuario.findByNickname";
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
     @Size(max = 80)
+    @NotNull
     @Column(name = "nickname")
     private String nickname;
+    @Size(max = 80)
+    @NotNull
+    @Column(name = "password")
+    private String password;    
     @Size(max = 150)
+    @NotNull
     @Column(name = "nombres")
     private String nombres;
     @Size(max = 150)
+    @NotNull
     @Column(name = "apellidos")
     private String apellidos;
     @Size(max = 150)
+    @NotNull
     @Column(name = "correo")
     private String correo;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nickname, String nombres, String apellidos, String correo) {
-        this.id=id;
+    public Usuario(String nickname, String nombres, String apellidos, String correo) {        
         this.nickname=nickname;
         this.nombres=nombres;
         this.apellidos=apellidos;
@@ -77,6 +90,14 @@ public class Usuario implements Serializable {
         this.nickname = nickname;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+        
     public String getNombres() {
         return nombres;
     }

@@ -5,13 +5,14 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
-    <h:body>   
-        <ui:composition template="/plantilla/plantilla.xhtml">
+<h:body>   
+    <ui:composition template="/plantilla/plantilla.xhtml">
+        <ui:define name="content">
+            
             <ui:param name="ccFormUsuarioId" value="formCptFormUsuario:ccFormUsuarioId" />
             <ui:param name="ccLstUsuarioId" value="formCptListUsuario:ccLstUsuarioId" />
-            <ui:define name="content">
-
-                <p:outputLabel value="Administrar Usuario" styleClass="titulo-right-h2"/>
+            
+            <p:outputLabel value="Administrar Usuario" styleClass="titulo-right-h2"/>
 
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
@@ -23,8 +24,8 @@
                         </div>
                     </div>
                 </div>
-
-            </ui:define>
-        </ui:composition>
-   </h:body>
+            
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

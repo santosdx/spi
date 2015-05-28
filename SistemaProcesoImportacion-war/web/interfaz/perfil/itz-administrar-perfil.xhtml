@@ -5,17 +5,13 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
-    <h:body>   
-        <ui:composition template="/plantilla/plantilla.xhtml">
-            <ui:define name="content">
-                <p:outputLabel value="Administrar Perfiles" styleClass="titulo-right-h2"/>
-                <p:growl id="growl" life="2000" showDetail="true" sticky="true"/>
-                <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/>
-                <lista:unica-seleccion label="Lista verduras" bean="#{practica.cboVerduras}" habilitarTest="true"/>
-                <lista:unica-seleccion label="Lista carnes:" bean="#{practica.cboCarnes}" habilitarTest="true"/>
-                <p:commandButton value="Validar Datos" actionListener="#{practica.consultarDato}" update="growl"/>                        
-                <p:commandButton value="Ventana" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('ventana/vta-lista',false,true,false,200,300)}"/>                                
-            </ui:define>
-        </ui:composition>
-   </h:body>
+<h:body>   
+    <ui:composition template="/plantilla/plantilla.xhtml">
+        <ui:define name="content">
+            
+            <p:outputLabel value="Administrar Perfiles" styleClass="titulo-right-h2"/>
+        
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

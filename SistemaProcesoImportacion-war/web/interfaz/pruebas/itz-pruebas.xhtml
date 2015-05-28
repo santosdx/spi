@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
+<h:body>   
+    <ui:composition template="/plantilla/plantilla.xhtml">
+        <ui:define name="content">
+            <p:growl id="growl" life="2000" showDetail="true" sticky="true"/>
+            
+            <p:outputLabel value="Pagina para pruebas" styleClass="titulo-right-h2"/>
+
+            <lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/>
+            <lista:unica-seleccion label="Lista verduras" bean="#{practica.cboVerduras}" habilitarTest="true"/>
+            <lista:unica-seleccion label="Lista carnes:" bean="#{practica.cboCarnes}" habilitarTest="true"/>
+            <p:commandButton value="Validar Datos" actionListener="#{practica.consultarDato}" update="growl"/>                        
+            <p:commandButton value="Ventana" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('ventana/vta-lista',false,true,false,200,300)}"/>                                
+        
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

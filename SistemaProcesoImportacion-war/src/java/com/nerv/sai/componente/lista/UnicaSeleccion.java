@@ -29,9 +29,9 @@ public class UnicaSeleccion extends UINamingContainer{
      */
     public void validarSeleccion(ActionEvent actionEvent) {
         if(getObjSeleccion() != null){
-            Mensaje.agregarMensajeGrowl("Selección,["+getObjSeleccion().getId()+"] "+getObjSeleccion().getLabel());
+            Mensaje.agregarMensajeGrowlInfo("Información","Selección,["+getObjSeleccion().getId()+"] "+getObjSeleccion().getLabel());
         }else{
-            Mensaje.agregarMensajeGrowl("Debe seleccionar un item.");
+            Mensaje.agregarMensajeGrowlInfo("Información","Debe seleccionar un item.");
         }
     } 
 

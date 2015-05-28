@@ -9,9 +9,10 @@
     <p:panel id="ccFormUsuarioId">
     <!--p:outputLabel value="Administrar Usuario" styleClass="titulo-right-h2"/-->
     <f:facet name="header">
-        Administrar Usuario
+        Información del Usuario
     </f:facet>     
     
+    <p:growl showDetail="true"  life="3000"/>
     <!--p:outputLabel value="Crear/Editar Usuario" styleClass="titulo-center-h3"/-->
 
         <div class="ui-grid ui-grid-responsive">
@@ -20,15 +21,25 @@
                     <p:outputLabel for="txtNickname" value="Usuario:" styleClass="etiquetaFormulario"/>
                 </div>
                 <div class="ui-grid-col-9">
-                    <p:inputText id="txtNickname" value="#{MbAdministrarUsuario.usuarioSeleccionado.nickname}" required="true" style="width: 90%;"/>
+                    <p:inputText id="txtNickname" value="#{MbAdministrarUsuario.usuarioSeleccionado.nickname}"  required="true" style="width: 90%;"/>        
                 </div>
             </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    <p:outputLabel for="txtPassword" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                </div>
+                <div class="ui-grid-col-9">
+                    <p:password id="txtPassword" value="#{MbAdministrarUsuario.usuarioSeleccionado.password}"  redisplay="true"
+                                goodLabel="Media!" strongLabel="Fuerte!" weakLabel="Debil!" requiredMessage="Contraseña requerida." promptLabel="Porfavor, ingrese la contraseña."
+                                feedback="true" required="true" style="width: 90%;"/>
+                </div>
+            </div>            
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
                     <p:outputLabel for="txtNombres" value="Nombres:" styleClass="etiquetaFormulario"/>
                 </div>
                 <div class="ui-grid-col-9">
-                    <p:inputText id="txtNombres" value="#{MbAdministrarUsuario.usuarioSeleccionado.nombres}" required="true" style="width: 90%;"/>
+                    <p:inputText id="txtNombres" value="#{MbAdministrarUsuario.usuarioSeleccionado.nombres}"  required="true" style="width: 90%;"/>        
                 </div>
             </div>
             <div class="ui-grid-row">
@@ -36,7 +47,7 @@
                     <p:outputLabel for="txtApellidos" value="Apellidos:" styleClass="etiquetaFormulario"/>
                 </div>
                 <div class="ui-grid-col-9">
-                    <p:inputText id="txtApellidos" value="#{MbAdministrarUsuario.usuarioSeleccionado.apellidos}" required="true" style="width: 90%;"/>
+                    <p:inputText id="txtApellidos" value="#{MbAdministrarUsuario.usuarioSeleccionado.apellidos}" required="true" style="width: 90%;"/>        
                 </div>
             </div>
             <div class="ui-grid-row">
@@ -44,7 +55,7 @@
                     <p:outputLabel for="txtCorreo" value="Correo:" styleClass="etiquetaFormulario"/>
                 </div>
                 <div class="ui-grid-col-9">
-                    <p:inputText id="txtCorreo" value="#{MbAdministrarUsuario.usuarioSeleccionado.correo}" required="true"  style="width: 90%;"/>
+                    <p:inputText id="txtCorreo" value="#{MbAdministrarUsuario.usuarioSeleccionado.correo}" required="true"  style="width: 90%;"/>                    
                 </div>
             </div>    
             <div class="ui-grid-row">
@@ -52,16 +63,18 @@
                    <p:outputLabel value="" styleClass="etiquetaFormulario"/>
                 </div>
                 <div class="ui-grid-col-9">
-                    <p:commandButton value="Nuevo" update="formCptFormUsuario:ccFormUsuarioId" actionListener="#{MbAdministrarUsuario.nuevoUsuario}">
+                    <p:commandButton value="Nuevo" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" 
+                                    disabled="#{!MbAdministrarUsuario.esNuevoUsuario}" actionListener="#{MbAdministrarUsuario.nuevoUsuario}"/>
+                    <p:commandButton value="Actualizar" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" 
+                                    disabled="#{MbAdministrarUsuario.esNuevoUsuario}" actionListener="#{MbAdministrarUsuario.actualziarUsuario}"/>
                     
-                    </p:commandButton>
-                    <p:commandButton value="Guardar" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" actionListener="#{MbAdministrarUsuario.guardarUsuario}">
-                        <!--f:setPropertyActionListener value="#{MbAdministrarUsuario.usuarioSeleccionado}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" /-->
-                    </p:commandButton>
+                    <!--p:commandButton value="Actualizar" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" actionListener="#{MbAdministrarUsuario.actualziarUsuario}">
+                        <f:setPropertyActionListener value="#{MbAdministrarUsuario.usuarioSeleccionado}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" />
+                    </p:commandButton-->
                 </div>
             </div>      
         </div>
-        <p:messages id="msgs" />
+
     </p:panel>  
 </h:form>    
 </ui:composition>

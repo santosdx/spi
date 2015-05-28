@@ -2,6 +2,7 @@ package com.nerv.sai.bean;
 
 import com.nerv.sai.modelo.entidad.Usuario;
 import com.nerv.sai.modelo.local.UsuarioFacadeLocal;
+import com.nerv.sai.utilidad.Mensaje;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,7 +21,9 @@ public class AdministrarUsuario {
     private UsuarioFacadeLocal eJBServicioUsuario;
     
     final static Logger LOGGER = Logger.getLogger(Practica.class);
-        
+    
+    private boolean esNuevoUsuario;
+    
     private List<Usuario> listaUsuarios;
     private Usuario usuarioSeleccionado;
     
@@ -30,30 +33,42 @@ public class AdministrarUsuario {
     
     @PostConstruct
     public void init(){
-        Usuario nuevoUsuario = new Usuario(0, null, null, null, null);
-        setUsuarioSeleccionado(nuevoUsuario);
-        setListaUsuarios(geteJBServicioUsuario().findAll());
+        inicializarVariables();
     }
 
-    public void nuevoUsuario(){
-        Usuario nuevoUsuario = new Usuario(0, null, null, null, null);
-        setUsuarioSeleccionado(nuevoUsuario);
-        LOGGER.info("nuevo");
+    public void nuevoUsuario(){        
+        if(getUsuarioSeleccionado().getNickname() != null){
+            if(geteJBServicioUsuario().buscarUsuarioByNickname(getUsuarioSeleccionado().getNickname()) == null){
+                geteJBServicioUsuario().create(getUsuarioSeleccionado());
+                inicializarVariables();
+                //LOGGER.info("nuevo usuario");
+                Mensaje.agregarMensajeGrowlInfo("Exito!", "Nuevo usuario agregado.");
+            }else{
+                //LOGGER.info("el usuario ya existe");
+                Mensaje.agregarMensajeGrowlWarn("Atención!", "El usuario ya existe.");
+            }
+        }else{
+            //LOGGER.info("ingresar datos usuario");
+            Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe ingresar los datos.");
+        }        
     }    
     
-    public void guardarUsuario(){
-        if(getUsuarioSeleccionado().getId() == 0){
-            geteJBServicioUsuario().create(getUsuarioSeleccionado());
-            setListaUsuarios(geteJBServicioUsuario().findAll());
-            nuevoUsuario();
-            LOGGER.info("guardo nuevo usuario");
-        }else{
+    public void actualziarUsuario(){
+        if(getUsuarioSeleccionado().getId() != null){
             geteJBServicioUsuario().edit(getUsuarioSeleccionado());
-            setListaUsuarios(geteJBServicioUsuario().findAll());
-            nuevoUsuario();
-            LOGGER.info("actualizo usuario");
-        }
-        
+            inicializarVariables();
+            //LOGGER.info("actualizo usuario");
+            Mensaje.agregarMensajeGrowlInfo("Exito!", "Usuario actualizado.");
+        }else{
+            //LOGGER.info("seleccionar usuario");
+            Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un usuario.");
+        }        
+    }
+    
+    private void inicializarVariables(){
+        setListaUsuarios(geteJBServicioUsuario().findAll());
+        setUsuarioSeleccionado(new Usuario(null, null, null, null));
+        setEsNuevoUsuario(true);
     }
     
     // Métodos Set y Get para los atributos de la clase
@@ -79,7 +94,16 @@ public class AdministrarUsuario {
     }
 
     public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        setEsNuevoUsuario(false);
         this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+
+    public boolean getEsNuevoUsuario() {
+        return esNuevoUsuario;
+    }
+
+    public void setEsNuevoUsuario(boolean esNuevoUsuario) {
+        this.esNuevoUsuario = esNuevoUsuario;
     }
     
     
