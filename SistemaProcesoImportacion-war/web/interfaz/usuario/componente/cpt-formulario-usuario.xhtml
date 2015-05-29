@@ -57,7 +57,19 @@
                 <div class="ui-grid-col-9">
                     <p:inputText id="txtCorreo" value="#{MbAdministrarUsuario.usuarioSeleccionado.correo}" required="true"  style="width: 90%;"/>                    
                 </div>
-            </div>    
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    <p:outputLabel value="Perfil" styleClass="etiquetaFormulario"/>
+                </div>
+                <div class="ui-grid-col-9">
+                    <p:selectOneMenu id="ccCboUniSelePerfilId" value="#{MbAdministrarPerfil.perfilSeleccionado}" >
+                        <f:selectItem itemLabel="Seleccione un item" itemValue="" />
+                        <f:selectItems value="#{MbAdministrarPerfil.listaPerfiles}" var="perfil" itemLabel="#{perfil.perfil}" itemValue="#{perfil}" />
+                    </p:selectOneMenu>                     
+                </div>
+            </div>
+            <!--ui:include src="../../perfil/componente/cpt-combo-unica-seleccion-perfil.xhtml"/-->
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
                    <p:outputLabel value="" styleClass="etiquetaFormulario"/>

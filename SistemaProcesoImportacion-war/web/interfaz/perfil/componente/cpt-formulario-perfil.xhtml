@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+<h:form id="formCptFormPerfil">
+    <p:panel id="ccFormPerfilId">
+    <!--p:outputLabel value="Administrar Perfil" styleClass="titulo-right-h2"/-->
+    <f:facet name="header">
+        Información del Perfil
+    </f:facet>     
+    
+    <p:growl showDetail="true"  life="3000"/>
+    <!--p:outputLabel value="Crear/Editar Perfil" styleClass="titulo-center-h3"/-->
+
+        <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    <p:outputLabel for="txtPerfil" value="Perfil:" styleClass="etiquetaFormulario"/>
+                </div>
+                <div class="ui-grid-col-9">
+                    <p:inputText id="txtPerfil" value="#{MbAdministrarPerfil.perfilSeleccionado.perfil}"  required="true" style="width: 90%;"/>        
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    <p:outputLabel for="txtDescipcion" value="Descipción:" styleClass="etiquetaFormulario"/>
+                </div>
+                <div class="ui-grid-col-9">
+                    <p:inputText id="txtDescipcion" value="#{MbAdministrarPerfil.perfilSeleccionado.descripcion}"  required="true" style="width: 90%;"/>        
+                </div>
+            </div>            
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                   <p:outputLabel value="" styleClass="etiquetaFormulario"/>
+                </div>
+                <div class="ui-grid-col-9">
+                    <p:commandButton value="Nuevo" update="formCptFormPerfil:ccFormPerfilId,#{ccLstPerfilId}" 
+                                    disabled="#{!MbAdministrarPerfil.esNuevoPerfil}" actionListener="#{MbAdministrarPerfil.nuevoPerfil}"/>
+                    <p:commandButton value="Actualizar" update="formCptFormPerfil:ccFormPerfilId,#{ccLstPerfilId}" 
+                                    disabled="#{MbAdministrarPerfil.esNuevoPerfil}" actionListener="#{MbAdministrarPerfil.actualziarPerfil}"/>
+                </div>
+            </div>      
+        </div>
+
+    </p:panel>  
+</h:form>    
+</ui:composition>

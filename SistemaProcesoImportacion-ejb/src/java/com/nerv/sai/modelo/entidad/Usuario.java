@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -103,7 +104,7 @@ public class Usuario implements Serializable {
     }
 
     public void setNombres(String nombres) {
-        this.nombres = nombres;
+        this.nombres = WordUtils.capitalize(nombres.trim());
     }
 
     public String getApellidos() {
@@ -111,7 +112,7 @@ public class Usuario implements Serializable {
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        this.apellidos = WordUtils.capitalize(apellidos.trim());
     }
 
     public String getCorreo() {

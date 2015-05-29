@@ -1,7 +1,7 @@
-package com.nerv.sai.modelo.servicios;
+package com.nerv.sai.modelo.servicios.administracion;
 
 import com.nerv.sai.modelo.fachada.AbstractFacade;
-import com.nerv.sai.modelo.local.UsuarioFacadeLocal;
+import com.nerv.sai.modelo.local.administracion.UsuarioFacadeLocal;
 import com.nerv.sai.modelo.entidad.Usuario;
 import java.util.Collections;
 import java.util.List;
@@ -31,21 +31,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     
     @Override
     public Usuario buscarUsuarioByNickname(String nickname) {        
-        Usuario usuario = null;
+        Usuario resultado = null;
         try {
             Query query = em.createNamedQuery(Usuario.FINE_BYE_NICKNAME);
             query.setParameter("nickname", nickname);
 
-            List<Usuario> listaUsuarios = Collections.EMPTY_LIST;
-            listaUsuarios = query.getResultList();
-            if (listaUsuarios.isEmpty()) {
+            List<Usuario> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
                 return null;
             } else {
-                usuario = listaUsuarios.get(0);
+                resultado = listaResultado.get(0);
             }            
         } catch (Exception e) {
             e.printStackTrace(System.err);
         } 
-        return usuario;
+        return resultado;
     }
 }

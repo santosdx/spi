@@ -1,4 +1,4 @@
-package com.nerv.sai.modelo.local;
+package com.nerv.sai.modelo.local.administracion;
 
 import com.nerv.sai.modelo.entidad.Usuario;
 import java.util.List;

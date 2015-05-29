@@ -1,0 +1,22 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!--p:outputLabel value="Lista de Modulos" styleClass="titulo-center-h3"/-->
+    <h:form id="formCptListModulo">
+        <p:dataList id="ccLstModuloId" value="#{MbAdministrarModulo.listaModulos}" var="modulo" paginatorPosition="bottom"
+                    type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+            <f:facet name="header">
+                <p:outputLabel value="Lista de Modulos" style="display: block; width: 100%; text-align: left;"/>
+            </f:facet>
+            <p:commandLink update="#{ccFormModuloId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                <f:setPropertyActionListener value="#{modulo}" target="#{MbAdministrarModulo.moduloSeleccionado}" />
+            </p:commandLink>        
+            <p:outputLabel value="#{modulo.modulo} "/>
+            <p:outputLabel value="- #{modulo.descripcion}"/>      
+        </p:dataList>
+    </h:form>
+</ui:composition>

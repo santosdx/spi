@@ -1,0 +1,22 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!--p:outputLabel value="Lista de Permisos" styleClass="titulo-center-h3"/-->
+    <h:form id="formCptListPermiso">
+        <p:dataList id="ccLstPermisoId" value="#{MbAdministrarPermiso.listaPermisos}" var="permiso" paginatorPosition="bottom"
+                    type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+            <f:facet name="header">
+                <p:outputLabel value="Lista de Permisos" style="display: block; width: 100%; text-align: left;"/>
+            </f:facet>
+            <p:commandLink update="#{ccFormPermisoId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                <f:setPropertyActionListener value="#{permiso}" target="#{MbAdministrarPermiso.permisoSeleccionado}" />
+            </p:commandLink>        
+            <p:outputLabel value="#{permiso.permiso} "/>
+            <p:outputLabel value="- #{permiso.descripcion}"/>      
+        </p:dataList>
+    </h:form>
+</ui:composition>

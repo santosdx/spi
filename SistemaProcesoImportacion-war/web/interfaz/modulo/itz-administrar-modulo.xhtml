@@ -5,21 +5,21 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:lista="http://java.sun.com/jsf/composite/componente/lista">
-<h:body>   
+<h:body>
     <ui:composition template="/plantilla/plantilla.xhtml">
         <ui:define name="content">
             
-            <ui:param name="ccFormPermisoId" value="formCptFormPermiso:ccFormPermisoId" />
-            <ui:param name="ccLstPermisoId" value="formCptListPermiso:ccLstPermisoId" />
-            <p:outputLabel value="Administrar Permisos" styleClass="titulo-right-h2"/>
+            <ui:param name="ccFormModuloId" value="formCptFormModulo:ccFormModuloId" />
+            <ui:param name="ccLstModuloId" value="formCptListModulo:ccLstModuloId" />
+            <p:outputLabel value="Administrar Modulos" styleClass="titulo-right-h2"/>
             
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-6" style="padding-left: 14px; padding-right: 7px;">
-                        <ui:include src="componente/cpt-formulario-permiso.xhtml"/>
+                        <ui:include src="componente/cpt-formulario-modulo.xhtml"/>
                     </div>
                     <div class="ui-grid-col-6" style="padding-left: 14px; padding-right: 14px;">
-                        <ui:include src="componente/cpt-lista-permiso.xhtml"/>
+                        <ui:include src="componente/cpt-lista-modulo.xhtml"/>
                     </div>
                 </div>
             </div>  

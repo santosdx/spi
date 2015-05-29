@@ -1,7 +1,7 @@
 package com.nerv.main;
 
 import com.nerv.sai.modelo.entidad.SistemaInfo;
-import com.nerv.sai.modelo.local.SistemaInfoFacadeLocal;
+import com.nerv.sai.modelo.local.administracion.SistemaInfoFacadeLocal;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;

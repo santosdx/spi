@@ -1,4 +1,6 @@
-package com.nerv.sai.modelo.local;
+package com.nerv.sai.modelo.local.administracion;
+
+
 
 import com.nerv.sai.modelo.entidad.SistemaInfo;
 import java.util.List;

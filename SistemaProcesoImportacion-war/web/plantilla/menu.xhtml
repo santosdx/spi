@@ -8,14 +8,15 @@
         <ui:composition>    
             <p:menu toggleable="true">
                 <p:menuitem value="Inicio" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/index.xhtml" />
-                <p:submenu label="Administrar">                    
+                <p:submenu label="Administrar">
                     <p:menuitem value="Usuario" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/usuario/itz-administrar-usuario.xhtml" />
                     <p:menuitem value="Perfil" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/perfil/itz-administrar-perfil.xhtml" />
-                    <p:menuitem value="Permiso" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/permiso/itz-administrar-permiso.xhtml" />                    
+                    <p:menuitem value="Permiso" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/permiso/itz-administrar-permiso.xhtml" />
+                    <p:menuitem value="Módulo" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/modulo/itz-administrar-modulo.xhtml" />
                 </p:submenu>
                 <p:submenu label="Otros"> 
                     <p:menuitem value="Pruebas" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/pruebas/itz-pruebas.xhtml" />
-                </p:submenu>                
+                </p:submenu>
             </p:menu>
         </ui:composition>
     </h:body>

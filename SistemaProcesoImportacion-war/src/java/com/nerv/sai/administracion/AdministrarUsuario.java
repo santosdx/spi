@@ -1,13 +1,15 @@
-package com.nerv.sai.bean;
+package com.nerv.sai.administracion;
 
 import com.nerv.sai.modelo.entidad.Usuario;
-import com.nerv.sai.modelo.local.UsuarioFacadeLocal;
+import com.nerv.sai.modelo.local.administracion.UsuarioFacadeLocal;
 import com.nerv.sai.utilidad.Mensaje;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,12 +17,15 @@ import org.apache.log4j.Logger;
  * @author santosdx
  */
 @ManagedBean(name = "MbAdministrarUsuario")
-@SessionScoped
+@ViewScoped
 public class AdministrarUsuario {
     @EJB
     private UsuarioFacadeLocal eJBServicioUsuario;
     
-    final static Logger LOGGER = Logger.getLogger(Practica.class);
+    final static Logger LOGGER = Logger.getLogger(AdministrarUsuario.class);
+    
+    @ManagedProperty("#{MbAdministrarPerfil}")
+    private AdministrarPerfil servicioPerfil;
     
     private boolean esNuevoUsuario;
     
@@ -104,6 +109,14 @@ public class AdministrarUsuario {
 
     public void setEsNuevoUsuario(boolean esNuevoUsuario) {
         this.esNuevoUsuario = esNuevoUsuario;
+    }
+
+    public AdministrarPerfil getServicioPerfil() {
+        return servicioPerfil;
+    }
+
+    public void setServicioPerfil(AdministrarPerfil servicioPerfil) {
+        this.servicioPerfil = servicioPerfil;
     }
     
     

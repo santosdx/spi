@@ -1,8 +1,8 @@
-package com.nerv.sai.modelo.servicios;
 
+
+import com.nerv.sai.modelo.local.administracion.SistemaInfoFacadeLocal;
 import com.nerv.sai.modelo.entidad.SistemaInfo;
 import com.nerv.sai.modelo.fachada.AbstractFacade;
-import com.nerv.sai.modelo.local.SistemaInfoFacadeLocal;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
