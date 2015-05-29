@@ -12,7 +12,8 @@
             <f:facet name="header">
                 <p:outputLabel value="Lista de Usuarios" style="display: block; width: 100%; text-align: left;"/>
             </f:facet>
-            <p:commandLink update="#{ccFormUsuarioId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <p:commandLink update="#{ccFormUsuarioId}" title="Detalle..." action="#{MbAdministrarUsuario.seleccionarUsuario}"
+                           styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
                 <f:setPropertyActionListener value="#{usuario}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" />
             </p:commandLink>        
             <p:outputLabel value="#{usuario.nombres} "/>

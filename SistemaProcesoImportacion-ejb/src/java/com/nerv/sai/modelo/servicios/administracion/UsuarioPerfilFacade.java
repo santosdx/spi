@@ -1,6 +1,5 @@
 package com.nerv.sai.modelo.servicios.administracion;
 
-import com.nerv.sai.modelo.entidad.Usuario;
 import com.nerv.sai.modelo.local.administracion.UsuarioPerfilFacadeLocal;
 import com.nerv.sai.modelo.entidad.UsuarioPerfil;
 import com.nerv.sai.modelo.fachada.AbstractFacade;
@@ -29,9 +28,16 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
         super(UsuarioPerfil.class);
     }
 
+    /**
+     * Método que permite buscar una asiganación de perfil a usuario, retornando
+     * el objeto de la relación, o en caso de no encontrar nada un null
+     * @param idUsuario
+     * @param idPerfil
+     * @return 
+     */
     @Override
-    public boolean buscarAsignacionUsuarioPerfil(String idUsuario, String idPerfil) {        
-        boolean resultado = false;
+    public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil) {        
+        UsuarioPerfil resultado = null;
         try {
             Query query = em.createNamedQuery(UsuarioPerfil.FINE_BYE_IDUSUARIO_IDPERFIL);
             query.setParameter("idUsuario", idUsuario);
@@ -40,9 +46,9 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
             List<UsuarioPerfil> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {
-                resultado = false;
+                resultado = null;
             } else {
-                resultado = true;
+                resultado = listaResultado.get(0);
             }            
         } catch (Exception e) {
             e.printStackTrace(System.err);

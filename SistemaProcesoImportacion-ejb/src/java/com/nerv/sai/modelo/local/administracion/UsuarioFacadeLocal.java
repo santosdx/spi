@@ -12,9 +12,11 @@ import javax.ejb.Local;
 public interface UsuarioFacadeLocal {
 
     void create(Usuario usuario);
+    
+    public Integer createAndGetKey(Usuario usuario);
 
     void edit(Usuario usuario);
-
+        
     void remove(Usuario usuario);
 
     Usuario find(Object id);

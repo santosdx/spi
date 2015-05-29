@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UsuarioPerfil implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public static final String FINE_BYE_IDUSUARIO_IDPERFIL = "Modulo.findByIdUsuarioIdPerfil";
+    public static final String FINE_BYE_IDUSUARIO_IDPERFIL = "UsuarioPerfil.findByIdUsuarioIdPerfil";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +52,11 @@ public class UsuarioPerfil implements Serializable {
         this.id = id;
     }
 
+    public UsuarioPerfil(int idUsuario, int idPerfil) {
+        this.idUsuario = idUsuario;
+        this.idPerfil = idPerfil;
+    }
+    
     public UsuarioPerfil(Integer id, int idUsuario, int idPerfil) {
         this.id = id;
         this.idUsuario = idUsuario;

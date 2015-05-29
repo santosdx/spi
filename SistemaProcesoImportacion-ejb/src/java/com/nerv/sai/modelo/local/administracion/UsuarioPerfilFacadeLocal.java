@@ -30,5 +30,5 @@ public interface UsuarioPerfilFacadeLocal {
 
     int count();
     
-    public boolean buscarAsignacionUsuarioPerfil(String idUsuario, String idPerfil);
+    public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil);
 }

@@ -68,11 +68,31 @@ public class AdministrarPerfil {
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un perfil.");
         }        
     }
-    
+
+   /**
+     * Método que permite inicializar las variables necesarias para el funcionamiento
+     * de los metos de crear y actualiar.
+     */    
     private void inicializarVariables(){
         setListaPerfiles(geteJBServicioPerfil().findAll());
         setPerfilSeleccionado(new Perfil(null, null));
         setEsNuevoPerfil(true);
+    }
+
+    /**
+     * Método que retorna un perfil, del listado de perfiles de a cuerdo al id
+     * enviado como parametro.
+     * @param id
+     * @return 
+     */    
+    public Perfil getPerfilById(Integer id){
+        Perfil resultado = null;
+        for (Perfil item : getListaPerfiles()) {
+            if(Integer.compare(item.getId(), id)==0){
+                resultado = item;
+            }
+        }
+        return resultado;
     }
     
     // Métodos Set y Get para los atributos de la clase
