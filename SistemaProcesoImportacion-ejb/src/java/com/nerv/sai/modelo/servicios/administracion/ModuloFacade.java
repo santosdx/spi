@@ -3,6 +3,7 @@ package com.nerv.sai.modelo.servicios.administracion;
 import com.nerv.sai.modelo.local.administracion.ModuloFacadeLocal;
 import com.nerv.sai.modelo.entidad.Modulo;
 import com.nerv.sai.modelo.fachada.AbstractFacade;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -47,4 +48,26 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
         } 
         return resultado;
     }    
+
+    @Override
+    public List<Modulo> getModulesPerfilByIdPerfil(int idPerfil) {
+            List<Modulo> resultado = new ArrayList<Modulo>();
+        try {
+            Query query = em.createNamedQuery(Modulo.FINE_MODLE_BYE_IDPERFIL);
+            query.setParameter("idPerfil", idPerfil);
+
+            List<Modulo> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }            
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } 
+        return resultado;
+    }
+    
+    
 }

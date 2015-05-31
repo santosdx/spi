@@ -12,8 +12,9 @@
             <f:facet name="header">
                 <p:outputLabel value="Lista de Perfiles" style="display: block; width: 100%; text-align: left;"/>
             </f:facet>
-            <p:commandLink update="#{ccFormPerfilId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-                <f:setPropertyActionListener value="#{perfil}" target="#{MbAdministrarPerfil.perfilSeleccionado}" />
+            <p:commandLink update="#{ccFormPerfilId}" title="Detalle..." actionListener="#{MbAdministrarPerfil.seleccionarPerfil(perfil)}"
+                           styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                <!--f:setPropertyActionListener value="#{perfil}" target="#{MbAdministrarPerfil.perfilSeleccionado}" /-->
             </p:commandLink>        
             <p:outputLabel value="#{perfil.perfil} "/>
             <p:outputLabel value="- #{perfil.descripcion}"/>      

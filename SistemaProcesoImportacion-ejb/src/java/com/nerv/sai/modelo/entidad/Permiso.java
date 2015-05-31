@@ -27,7 +27,9 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Permiso.findById", query = "SELECT p FROM Permiso p WHERE p.id = :id"),
     @NamedQuery(name = "Permiso.findByPermiso", query = "SELECT p FROM Permiso p WHERE p.permiso = :permiso"),
     @NamedQuery(name = "Permiso.findByDescripcion", query = "SELECT p FROM Permiso p WHERE p.descripcion = :descripcion")})
+
 public class Permiso implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     
     public static final String FINE_BYE_PERMISO = "Permiso.findByPermiso";
@@ -114,5 +116,5 @@ public class Permiso implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Permiso[ id=" + id + " ]";
     }
-    
+
 }

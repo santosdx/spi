@@ -31,4 +31,5 @@ public interface UsuarioPerfilFacadeLocal {
     int count();
     
     public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil);
+   
 }

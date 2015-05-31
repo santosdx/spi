@@ -1,13 +1,16 @@
 package com.nerv.sai.administracion;
 
 import com.nerv.sai.modelo.entidad.Modulo;
+import com.nerv.sai.modelo.entidad.Permiso;
 import com.nerv.sai.modelo.local.administracion.ModuloFacadeLocal;
 import com.nerv.sai.utilidad.Mensaje;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,12 +18,15 @@ import org.apache.log4j.Logger;
  * @author santosdx
  */
 @ManagedBean(name = "MbAdministrarModulo")
-@SessionScoped
+@ViewScoped
 public class AdministrarModulo {
     @EJB
     private ModuloFacadeLocal eJBServicioModulo;
     
     final static Logger LOGGER = Logger.getLogger(AdministrarModulo.class);
+
+    @ManagedProperty("#{MbAdministrarPermiso}")
+    private AdministrarPermiso servicioPermiso;
     
     private boolean esNuevoModulo;
     
@@ -36,6 +42,19 @@ public class AdministrarModulo {
         inicializarVariables();
     }
 
+    /**
+     * Método que permite inicializar las variables necesarias para el funcionamiento
+     * de los metos de crear y actualiar.
+     */        
+    private void inicializarVariables(){
+        setListaModulos(geteJBServicioModulo().findAll());
+        setModuloSeleccionado(new Modulo(null, null));
+        setEsNuevoModulo(true);
+    }
+    
+    /**
+     * Método que permite crear un nuevo módulo en el sistema.
+     */
     public void nuevoModulo(){        
         if(getModuloSeleccionado().getModulo() != null){
             if(geteJBServicioModulo().buscarModuloByModulo(getModuloSeleccionado().getModulo()) == null){               
@@ -53,8 +72,14 @@ public class AdministrarModulo {
         }        
     }    
     
+    /**
+     * Método que permite editar un mulo en el sistema
+     */
     public void actualziarModulo(){
-        if(getModuloSeleccionado().getId() != null){            
+        if(getModuloSeleccionado().getId() != null){
+            if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
+                getServicioPermiso().adicionarPermisosModulo(getModuloSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());                
+            }            
             geteJBServicioModulo().edit(getModuloSeleccionado());
             inicializarVariables();
             //LOGGER.info("actualizo Modulo");
@@ -64,12 +89,23 @@ public class AdministrarModulo {
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un Modulo.");
         }        
     }
+
+   /**
+     * Método que permite seleccionar en la lista de modulo, el módulo a editar
+     * @param modulo
+     */
+    public void seleccionarPerfil(Modulo modulo){
+        setModuloSeleccionado(modulo);
+        
+        if(getModuloSeleccionado().getPermisos() !=null && !getModuloSeleccionado().getPermisos().isEmpty()){
+            getServicioPermiso().setListaPermisosSeleccionados(getModuloSeleccionado().getPermisos());  
+        }else{
+            getServicioPermiso().setListaPermisosSeleccionados(new ArrayList<Permiso>());
+        }
+                
+        LOGGER.info("Módulo seleccionado: "+getModuloSeleccionado().getId());
+    }    
     
-    private void inicializarVariables(){
-        setListaModulos(geteJBServicioModulo().findAll());
-        setModuloSeleccionado(new Modulo(null, null));
-        setEsNuevoModulo(true);
-    }
     
     // Métodos Set y Get para los atributos de la clase
     
@@ -105,6 +141,15 @@ public class AdministrarModulo {
     public void setEsNuevoModulo(boolean esNuevoModulo) {
         this.esNuevoModulo = esNuevoModulo;
     }
+
+    public AdministrarPermiso getServicioPermiso() {
+        return servicioPermiso;
+    }
+
+    public void setServicioPermiso(AdministrarPermiso servicioPermiso) {
+        this.servicioPermiso = servicioPermiso;
+    }
+    
     
     
 }

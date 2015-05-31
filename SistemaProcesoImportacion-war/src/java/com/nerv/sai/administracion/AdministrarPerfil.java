@@ -1,13 +1,15 @@
 package com.nerv.sai.administracion;
 
 import com.nerv.sai.modelo.entidad.Perfil;
+import com.nerv.sai.modelo.entidad.Permiso;
 import com.nerv.sai.modelo.local.administracion.PerfilFacadeLocal;
 import com.nerv.sai.utilidad.Mensaje;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 
@@ -23,6 +25,9 @@ public class AdministrarPerfil {
     
     final static Logger LOGGER = Logger.getLogger(AdministrarPerfil.class);
     
+    @ManagedProperty("#{MbAdministrarPermiso}")
+    private AdministrarPermiso servicioPermiso;
+    
     private boolean esNuevoPerfil;
     
     private List<Perfil> listaPerfiles;
@@ -37,11 +42,24 @@ public class AdministrarPerfil {
     public void init(){
         inicializarVariables();
     }
-
+    
+   /**
+     * Método que permite inicializar las variables necesarias para el funcionamiento
+     * de los metos de crear y actualiar.
+     */    
+    private void inicializarVariables(){
+        setListaPerfiles(geteJBServicioPerfil().findAll());
+        setPerfilSeleccionado(new Perfil(null, null));
+        setEsNuevoPerfil(true);
+    }
+    
+    /**
+     * Método que permite crear un nuevo perfil.
+     */
     public void nuevoPerfil(){        
         if(getPerfilSeleccionado().getPerfil() != null){
             if(geteJBServicioPerfil().buscarPerfilByPerfil(getPerfilSeleccionado().getPerfil()) == null){
-                //getPerfilSeleccionado().setPerfil(WordUtils.capitalize(getPerfilSeleccionado().getPerfil().trim()));
+                
                 geteJBServicioPerfil().create(getPerfilSeleccionado());
                 inicializarVariables();
                 //LOGGER.info("nuevo usuario");
@@ -56,10 +74,19 @@ public class AdministrarPerfil {
         }        
     }    
     
+    /**
+     * Método que permite actualizar los datos de un perfil.
+     */
     public void actualziarPerfil(){
-        if(getPerfilSeleccionado().getId() != null){
-            //getPerfilSeleccionado().setPerfil(WordUtils.capitalize(getPerfilSeleccionado().getPerfil().trim()));
+        if(getPerfilSeleccionado().getId() != null){                    
+    
+            if(getServicioPermiso().getListaPermisosSeleccionados() != null){
+                //if(getServicioPermiso().getListaPermisosSeleccionados().size()>0){
+                    getServicioPermiso().adicionarPermisosPerfil(getPerfilSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());
+                //}
+            }
             geteJBServicioPerfil().edit(getPerfilSeleccionado());
+            
             inicializarVariables();
             //LOGGER.info("actualizo Perfil");
             Mensaje.agregarMensajeGrowlInfo("Exito!", "Perfil actualizado.");
@@ -68,16 +95,23 @@ public class AdministrarPerfil {
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un perfil.");
         }        
     }
-
-   /**
-     * Método que permite inicializar las variables necesarias para el funcionamiento
-     * de los metos de crear y actualiar.
-     */    
-    private void inicializarVariables(){
-        setListaPerfiles(geteJBServicioPerfil().findAll());
-        setPerfilSeleccionado(new Perfil(null, null));
-        setEsNuevoPerfil(true);
-    }
+    
+    /**
+     * Método que permite seleccionar en la lista de permisos, los permisos que tiene
+     * el perfil
+     * @param perfil
+     */
+    public void seleccionarPerfil(Perfil perfil){
+        setPerfilSeleccionado(perfil);
+        
+        if(getPerfilSeleccionado().getPermisos() !=null && !getPerfilSeleccionado().getPermisos().isEmpty()){
+            getServicioPermiso().setListaPermisosSeleccionados(getPerfilSeleccionado().getPermisos());  
+        }else{
+            getServicioPermiso().setListaPermisosSeleccionados(new ArrayList<Permiso>());
+        }
+                
+        LOGGER.info("Perfil seleccionado: "+getPerfilSeleccionado().getId());
+    }    
 
     /**
      * Método que retorna un perfil, del listado de perfiles de a cuerdo al id
@@ -137,6 +171,13 @@ public class AdministrarPerfil {
     public void setListaPerfilesSeleccionados(List<Perfil> listaPerfilesSeleccionados) {
         this.listaPerfilesSeleccionados = listaPerfilesSeleccionados;
     }
-    
+
+    public AdministrarPermiso getServicioPermiso() {
+        return servicioPermiso;
+    }
+
+    public void setServicioPermiso(AdministrarPermiso servicioPermiso) {
+        this.servicioPermiso = servicioPermiso;
+    }
     
 }

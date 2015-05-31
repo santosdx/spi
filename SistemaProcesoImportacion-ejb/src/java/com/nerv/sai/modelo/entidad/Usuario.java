@@ -1,7 +1,6 @@
 package com.nerv.sai.modelo.entidad;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,10 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,11 +33,13 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Usuario.findByNickname", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname"),
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")})
+    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo"),
+    @NamedQuery(name = "Usuario.findByNicknamePassword", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname AND u.password = :password"),})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
     public static final String FINE_BYE_NICKNAME = "Usuario.findByNickname";
+    public static final String FINE_BYE_NICKNAME_PASSWORD = "Usuario.findByNicknamePassword";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

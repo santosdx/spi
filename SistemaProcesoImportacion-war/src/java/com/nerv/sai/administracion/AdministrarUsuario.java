@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 
@@ -47,6 +46,17 @@ public class AdministrarUsuario {
     }
 
     /**
+     * Método que permite inicializar las variables necesarias para el funcionamiento
+     * de los metos de crear y actualiar.
+     */
+    private void inicializarVariables(){
+        setListaUsuarios(geteJBServicioUsuario().findAll());
+        setUsuarioSeleccionado(new Usuario(null, null, null, null));
+        getServicioPerfil().setPerfilSeleccionado(null);
+        setEsNuevoUsuario(true);
+    }
+    
+    /**
      * Método que permite crear un nuevo usuario.
      */
     public void nuevoUsuario(){
@@ -54,7 +64,7 @@ public class AdministrarUsuario {
             if(geteJBServicioUsuario().buscarUsuarioByNickname(getUsuarioSeleccionado().getNickname()) == null){
                 
                 Integer idUsuario = getUsuarioSeleccionado().getId();
-                Integer idPerfil = servicioPerfil.getPerfilSeleccionado().getId();                         
+                Integer idPerfil = getServicioPerfil().getPerfilSeleccionado().getId();                         
                    
                 eJBServicioUsuarioPerfil.create(new UsuarioPerfil(idUsuario, idPerfil));
      
@@ -81,18 +91,18 @@ public class AdministrarUsuario {
             
             geteJBServicioUsuario().edit(getUsuarioSeleccionado());                                   
             
-            if(servicioPerfil.getPerfilSeleccionado() != null){
+            if(getServicioPerfil().getPerfilSeleccionado() != null){
                 
                 Integer idUsuario = getUsuarioSeleccionado().getId();
-                Integer idPerfil = servicioPerfil.getPerfilSeleccionado().getId();      
+                Integer idPerfil = getServicioPerfil().getPerfilSeleccionado().getId();      
                 
                 if(getUsuarioSeleccionado().getPerfil() == null){               
-                    eJBServicioUsuarioPerfil.create(new UsuarioPerfil(idUsuario, idPerfil));
+                    geteJBServicioUsuarioPerfil().create(new UsuarioPerfil(idUsuario, idPerfil));
                 }else{          
-                    if(Integer.compare(getUsuarioSeleccionado().getPerfil().getId(), servicioPerfil.getPerfilSeleccionado().getId()) != 0){
-                        UsuarioPerfil usuarioPerfil = eJBServicioUsuarioPerfil.buscarAsignacionUsuarioPerfil(idUsuario, getUsuarioSeleccionado().getPerfil().getId());
-                        usuarioPerfil.setIdPerfil(servicioPerfil.getPerfilSeleccionado().getId());
-                        eJBServicioUsuarioPerfil.edit(usuarioPerfil);
+                    if(Integer.compare(getUsuarioSeleccionado().getPerfil().getId(), getServicioPerfil().getPerfilSeleccionado().getId()) != 0){
+                        UsuarioPerfil usuarioPerfil = geteJBServicioUsuarioPerfil().buscarAsignacionUsuarioPerfil(idUsuario, getUsuarioSeleccionado().getPerfil().getId());
+                        usuarioPerfil.setIdPerfil(getServicioPerfil().getPerfilSeleccionado().getId());
+                        geteJBServicioUsuarioPerfil().edit(usuarioPerfil);
                     }else{
                       Mensaje.agregarMensajeGrowlWarn("Avertencia!", "El perfil seleccionado ya esta asignado.");
                     }           
@@ -110,35 +120,21 @@ public class AdministrarUsuario {
         }        
     }
     
+    /**
+     * Método que permite seleccionar en la lista de perfiles, el perfil que tiene
+     * el usuario
+     */
     public void seleccionarUsuario(){
-        //getUsuarioSeleccionado().getId();
-        if(getUsuarioSeleccionado().getPerfil() != null){
-            servicioPerfil.setPerfilSeleccionado(servicioPerfil.getPerfilById(getUsuarioSeleccionado().getPerfil().getId()));  
-        }else{
-            servicioPerfil.setPerfilSeleccionado(null);
-        }
         
+        if(getUsuarioSeleccionado().getPerfil() != null){
+            getServicioPerfil().setPerfilSeleccionado(getServicioPerfil().getPerfilById(getUsuarioSeleccionado().getPerfil().getId()));  
+        }else{
+            getServicioPerfil().setPerfilSeleccionado(null);
+        }
+        //getUsuarioSeleccionado().getId();
         //LOGGER.info("Usuario seleccionado: "+getUsuarioSeleccionado().getId());
     }
-    
-    /**
-     * Método que permite inicializar las variables necesarias para el funcionamiento
-     * de los metos de crear y actualiar.
-     */
-    private void inicializarVariables(){
-        setListaUsuarios(geteJBServicioUsuario().findAll());
-        setUsuarioSeleccionado(new Usuario(null, null, null, null));
-        servicioPerfil.setPerfilSeleccionado(null);
-        setEsNuevoUsuario(true);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
+       
     
     
     // Métodos Set y Get para los atributos de la clase
@@ -151,6 +147,14 @@ public class AdministrarUsuario {
         this.eJBServicioUsuario = eJBServicioUsuario;
     }
 
+    public UsuarioPerfilFacadeLocal geteJBServicioUsuarioPerfil() {
+        return eJBServicioUsuarioPerfil;
+    }
+
+    public void seteJBServicioUsuarioPerfil(UsuarioPerfilFacadeLocal eJBServicioUsuarioPerfil) {
+        this.eJBServicioUsuarioPerfil = eJBServicioUsuarioPerfil;
+    }
+    
     public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }

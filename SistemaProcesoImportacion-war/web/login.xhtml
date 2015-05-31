@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        </f:facet>
+        <!--link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/imagenes/dane.ico"/-->
+        <h:outputStylesheet library="css" name="general.css" />
+        <title>#{nerv['sistema.title']}</title>
+    </h:head>
+    
+    <h:body>
+        <center>
+        <h:form>
+             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+            <h:panelGrid id="pnlLogin" columns="2" cellpadding="5">
+                <h:outputLabel for="username" value="Username:" />
+                <p:inputText id="username" value="#{MbLogin.username}" 
+                                    required="true" label="username" requiredMessage="Usuario requerido"/>
+
+                <h:outputLabel for="password" value="Password:" />
+                <p:password id="password" value="#{MbLogin.password}" 
+                                    required="true" label="password" requiredMessage="Contraseña requerida" />
+                
+                <p:spacer width="10"/>
+                <p:commandButton value="Login" update="growl" actionListener="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>                
+            </h:panelGrid>
+            <p:spotlight target="pnlLogin" widgetVar="spot"/>
+        </h:form>
+        </center>
+        <script type="text/javascript">
+          function manejarLogin(xhr, status, args) {
+            if (args.loggedIn) {
+              setTimeout(function() {
+                window.location = args.view;
+              }, 500);
+            }
+          }
+        </script>
+    </h:body>
+</html>

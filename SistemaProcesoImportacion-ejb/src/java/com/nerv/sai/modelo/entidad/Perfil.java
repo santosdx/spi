@@ -1,14 +1,22 @@
 package com.nerv.sai.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,7 +35,9 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Perfil.findById", query = "SELECT p FROM Perfil p WHERE p.id = :id"),
     @NamedQuery(name = "Perfil.findByPerfil", query = "SELECT p FROM Perfil p WHERE p.perfil = :perfil"),
     @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion")})
+
 public class Perfil implements Serializable {
+        
     private static final long serialVersionUID = 1L;
     
     public static final String FINE_BYE_PERFIL = "Perfil.findByPerfil";
@@ -47,6 +57,14 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "perfil_permiso",
+            joinColumns = @JoinColumn(name = "id_perfil"),
+            inverseJoinColumns = @JoinColumn(name = "id_permiso")
+    )
+    private List<Permiso> permisos;    
 
     public Perfil() {
     }
@@ -89,6 +107,18 @@ public class Perfil implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public List<Permiso> getPermisos() {
+        List<Permiso> lista = new ArrayList<>(permisos);
+        Collections.copy(lista, permisos);       
+        return lista;
+    }
+
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
+    }
+    
+    
 
     @Override
     public int hashCode() {

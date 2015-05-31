@@ -74,4 +74,34 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } 
         return resultado;
     }
+
+    /**
+     * Método que permite obtener un usuario de la entidad usuario, pasando como
+     * parametro el nickname (alias) y contraseña.
+     * @param nickname
+     * @param password
+     * @return 
+     */
+    @Override
+    public Usuario buscarUsuarioByNicknamePassword(String nickname, String password) {
+        Usuario resultado = null;
+        try {
+            Query query = em.createNamedQuery(Usuario.FINE_BYE_NICKNAME_PASSWORD);
+            query.setParameter("nickname", nickname);
+            query.setParameter("password", password);
+
+            List<Usuario> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado.get(0);
+            }            
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } 
+        return resultado;        
+    }
+    
+    
 }
