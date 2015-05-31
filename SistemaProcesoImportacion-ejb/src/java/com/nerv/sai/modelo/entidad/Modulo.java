@@ -35,19 +35,19 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Modulo.findById", query = "SELECT m FROM Modulo m WHERE m.id = :id"),
     @NamedQuery(name = "Modulo.findByModulo", query = "SELECT m FROM Modulo m WHERE m.modulo = :modulo"),    
     @NamedQuery(name = "Modulo.findByDescripcion", query = "SELECT m FROM Modulo m WHERE m.descripcion = :descripcion"),
-    @NamedQuery(name = "Modulo.findModulPerfilByIdPerfil", 
+    /*@NamedQuery(name = "Modulo.findModulPerfilByIdPerfil", 
                 query = "SELECT DISTINCT m  " +
-                        "FROM Modulo m, ModuloPermiso mp, Permiso pe, PerfilPermiso pp" +
-                        "JOIN m.roles mRole " +
-                        "JOIN mp.roles mpRole " +
-                        "JOIN pp.roles ppRole " + 
-                        "WHERE pp.idPerfil = :idPerfil"),
+                        "FROM Modulo m " +
+                        "JOIN ModuloPermiso mp ON (m.id = mp.id_modulo) " +           
+                        "JOIN PerfilPermiso pp ON (pp.id_permiso = mp.id_permiso) " +
+                        "JOIN Permiso pe       ON (pe.id = pp.id_permiso) " +
+                        "WHERE pp.idPerfil = :idPerfil"),*/
 })
 public class Modulo implements Serializable {
     private static final long serialVersionUID = 1L;
     
     public static final String FINE_BYE_MODULO = "Modulo.findByModulo";
-    public static final String FINE_MODLE_BYE_IDPERFIL = "Modulo.findModulPerfilByIdPerfil";
+    //public static final String FINE_MODLE_BYE_IDPERFIL = "Modulo.findModulPerfilByIdPerfil";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

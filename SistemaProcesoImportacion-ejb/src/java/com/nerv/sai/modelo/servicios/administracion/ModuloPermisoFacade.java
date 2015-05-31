@@ -62,5 +62,4 @@ public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implement
         return resultado;        
     }
     
-    
 }

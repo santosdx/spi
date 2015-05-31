@@ -6,8 +6,9 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>   
         <ui:composition>
-            <h:form>
-            <p:menu toggleable="true">
+            <h:form id="frmMenu">
+            <p:growl id="messagesMenu" showDetail="false"/>
+            <!--p:menu toggleable="true">                
                 <p:menuitem value="Inicio" icon="ui-icon-home" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/index.xhtml" />
                 <p:submenu label="Administrar">
                     <p:menuitem value="Usuarios" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/usuario/itz-administrar-usuario.xhtml" />
@@ -19,7 +20,9 @@
                     <p:menuitem value="Pruebas" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/pruebas/itz-pruebas.xhtml" />
                     <p:menuitem value="Salir" actionListener="#{MbLogin.logout}"/>
                 </p:submenu>
-            </p:menu>
+            </p:menu-->
+                
+            <p:menu model="#{MbLogin.modeloMenu}" toggleable="true" />
             </h:form>                
         </ui:composition>
     </h:body>

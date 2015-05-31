@@ -46,5 +46,32 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
             e.printStackTrace(System.err);
         } 
         return resultado;
-    }    
+    }
+
+    @Override
+    public List<Permiso> buscarPermisosUsuarioByidPerfil(Integer idPerfil) {        
+        List<Permiso> resultado = null;
+        try {
+            String sql= "SELECT DISTINCT pe.* " +
+                        "FROM modulo m " +
+                        "JOIN modulo_permiso mp ON (m.id = mp.id_modulo) " +
+                        "JOIN perfil_permiso pp ON (pp.id_permiso = mp.id_permiso) " +
+                        "JOIN permiso pe        ON (pe.id =pp.id_permiso) " +
+                        "WHERE pp.id_perfil = ?";
+            
+            Query query = em.createNativeQuery(sql,Permiso.class);
+            query.setParameter(1, idPerfil);
+
+            List<Permiso> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }            
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } 
+        return resultado;
+    }     
 }

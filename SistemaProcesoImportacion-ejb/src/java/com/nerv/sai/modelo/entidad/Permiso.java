@@ -49,7 +49,19 @@ public class Permiso implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
-
+    @Basic(optional = false)
+    @Column(name = "url")
+    private String url;
+    @Basic(optional = false)
+    @Column(name = "comando")
+    private String comando;
+    @Basic(optional = false)
+    @Column(name = "actualizar")
+    private String actualizar;
+    @Basic(optional = false)
+    @Column(name = "ajax")
+    private int ajax;
+    
     public Permiso() {
     }
 
@@ -92,6 +104,38 @@ public class Permiso implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getComando() {
+        return comando;
+    }
+
+    public void setComando(String comando) {
+        this.comando = comando;
+    }
+
+    public String getActualizar() {
+        return actualizar;
+    }
+
+    public void setActualizar(String actualizar) {
+        this.actualizar = actualizar;
+    }
+
+    public int getAjax() {
+        return ajax;
+    }
+
+    public void setAjax(int ajax) {
+        this.ajax = ajax;
+    }    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,6 +159,6 @@ public class Permiso implements Serializable {
     @Override
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Permiso[ id=" + id + " ]";
-    }
+    }    
 
 }

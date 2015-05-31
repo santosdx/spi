@@ -1,9 +1,10 @@
 package com.nerv.sai.seguridad;
 
 import com.nerv.sai.modelo.entidad.Modulo;
-import com.nerv.sai.modelo.entidad.ModuloPermiso;
+import com.nerv.sai.modelo.entidad.Permiso;
 import com.nerv.sai.modelo.entidad.Usuario;
 import com.nerv.sai.modelo.local.administracion.ModuloFacadeLocal;
+import com.nerv.sai.modelo.local.administracion.ModuloPermisoFacadeLocal;
 import com.nerv.sai.modelo.local.administracion.UsuarioFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,8 +18,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuModel;
 
 /**
  * Clase de acceso.
@@ -34,12 +40,17 @@ public class Login implements Serializable{
     
     @EJB
     private ModuloFacadeLocal eJBServicioModulo;
+
+    @EJB
+    private ModuloPermisoFacadeLocal eJBServicioModuloPermiso;
     
+    private final String pathSistema = "#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}";
     private Usuario usuarioLogueado;
     private String username;
     private String password;
     private boolean loggedIn;
     private List<Modulo> listaModulos;
+    private MenuModel modeloMenu;
     
     public Login(){
     
@@ -63,6 +74,50 @@ public class Login implements Serializable{
         if(usuarioLogueado != null) {
             setLoggedIn(true);
             setListaModulos(geteJBServicioModulo().getModulesPerfilByIdPerfil(getUsuarioLogueado().getPerfil().getId()));
+            
+            setModeloMenu(new DefaultMenuModel());
+            
+            DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
+            itemHome.setUrl("/index.xhtml");
+            itemHome.setIcon("ui-icon-home");
+            getModeloMenu().addElement(itemHome);     
+            
+            for (Modulo modulo : getListaModulos()) {
+               //First submenu
+                DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
+     
+                for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
+                    if(geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null){
+                        DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
+                        if(permiso.getUrl() != null){
+                            item.setUrl(permiso.getUrl());
+                        }
+                        if(permiso.getComando()!= null && !StringUtils.isEmpty(permiso.getComando())){
+                            item.setCommand(permiso.getComando());
+                            item.setUrl(null);
+                        }
+                        if(permiso.getActualizar()!=null){
+                            item.setUpdate(permiso.getActualizar());    
+                        }
+                        
+                        item.setAjax((permiso.getAjax() != 0));
+                        //item.setIcon("ui-icon-home");
+                        submenu.addElement(item);                         
+                    }                   
+                }
+                getModeloMenu().addElement(submenu);
+            }
+            /*
+            DefaultSubMenu submenuPerfil = new DefaultSubMenu("Perfil2");
+                DefaultMenuItem itemSalir = new DefaultMenuItem("Salir2");
+                //itemSalir.setUrl(pathSistema+"/index.xhtml");
+                itemSalir.setCommand("#{MbLogin.logout}");
+                itemSalir.setIcon("fa-sign-out");
+                submenuPerfil.addElement(itemSalir);
+            getModeloMenu().addElement(submenuPerfil); 
+            */
+            
+            
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuarioLogueado.getNombres());
         } else {
             setLoggedIn(false);
@@ -109,7 +164,15 @@ public class Login implements Serializable{
         this.eJBServicioModulo = eJBServicioModulo;
     }
 
-        
+    public ModuloPermisoFacadeLocal geteJBServicioModuloPermiso() {
+        return eJBServicioModuloPermiso;
+    }
+
+    public void seteJBServicioModuloPermiso(ModuloPermisoFacadeLocal eJBServicioModuloPermiso) {
+        this.eJBServicioModuloPermiso = eJBServicioModuloPermiso;
+    }
+
+    
     
     /**
      * @return the username
@@ -170,7 +233,13 @@ public class Login implements Serializable{
         this.listaModulos = listaModulos;
     }
 
-    
-    
+    public MenuModel getModeloMenu() {
+        return modeloMenu;
+    }
+
+    public void setModeloMenu(MenuModel modeloMenu) {
+        this.modeloMenu = modeloMenu;
+    }
+        
     
 }

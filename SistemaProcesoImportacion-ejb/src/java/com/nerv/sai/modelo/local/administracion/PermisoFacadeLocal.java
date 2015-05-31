@@ -26,5 +26,5 @@ public interface PermisoFacadeLocal {
     int count();
     
     public Permiso buscarPermisoByPermiso(String permiso);
-    
+    public List<Permiso> buscarPermisosUsuarioByidPerfil(Integer idPerfil);
 }

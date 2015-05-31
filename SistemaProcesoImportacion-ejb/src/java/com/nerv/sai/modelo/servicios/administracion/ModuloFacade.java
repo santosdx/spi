@@ -53,9 +53,18 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
     public List<Modulo> getModulesPerfilByIdPerfil(int idPerfil) {
             List<Modulo> resultado = new ArrayList<Modulo>();
         try {
-            Query query = em.createNamedQuery(Modulo.FINE_MODLE_BYE_IDPERFIL);
-            query.setParameter("idPerfil", idPerfil);
-
+            //Query query = em.createNamedQuery(Modulo.FINE_MODLE_BYE_IDPERFIL);
+                        
+            String sql= "SELECT DISTINCT m.* " +
+                        "FROM modulo m " +
+                        "JOIN modulo_permiso mp ON (m.id = mp.id_modulo) " +
+                        "JOIN perfil_permiso pp ON (pp.id_permiso = mp.id_permiso) " +
+                        "JOIN permiso pe        ON (pe.id =pp.id_permiso) " +
+                        "WHERE pp.id_perfil = ?";
+            
+            Query query = em.createNativeQuery(sql,Modulo.class);
+            query.setParameter(1, idPerfil);
+            
             List<Modulo> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {
