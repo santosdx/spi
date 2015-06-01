@@ -12,6 +12,8 @@ import javax.ejb.Local;
 public interface ModuloFacadeLocal {
 
     void create(Modulo modulo);
+    
+    public Integer createAndGetKey(Modulo modulo);
 
     void edit(Modulo modulo);
 

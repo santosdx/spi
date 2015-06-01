@@ -59,8 +59,13 @@ public class AdministrarPerfil {
     public void nuevoPerfil(){        
         if(getPerfilSeleccionado().getPerfil() != null){
             if(geteJBServicioPerfil().buscarPerfilByPerfil(getPerfilSeleccionado().getPerfil()) == null){
+                                             
+                Integer idPerfil = geteJBServicioPerfil().createAndGetKey(getPerfilSeleccionado());      
+            
+                if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
+                    getServicioPermiso().adicionarPermisosPerfil(idPerfil, getServicioPermiso().getListaPermisosSeleccionados());                
+                }
                 
-                geteJBServicioPerfil().create(getPerfilSeleccionado());
                 inicializarVariables();
                 //LOGGER.info("nuevo usuario");
                 Mensaje.agregarMensajeGrowlInfo("Exito!", "Nuevo perfil agregado.");
@@ -80,10 +85,8 @@ public class AdministrarPerfil {
     public void actualziarPerfil(){
         if(getPerfilSeleccionado().getId() != null){                    
     
-            if(getServicioPermiso().getListaPermisosSeleccionados() != null){
-                //if(getServicioPermiso().getListaPermisosSeleccionados().size()>0){
-                    getServicioPermiso().adicionarPermisosPerfil(getPerfilSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());
-                //}
+            if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
+                getServicioPermiso().adicionarPermisosPerfil(getPerfilSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());                
             }
             geteJBServicioPerfil().edit(getPerfilSeleccionado());
             

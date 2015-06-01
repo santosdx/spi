@@ -12,6 +12,8 @@ import javax.ejb.Local;
 public interface PerfilFacadeLocal {
 
     void create(Perfil perfil);
+    
+    public Integer createAndGetKey(Perfil perfil);
 
     void edit(Perfil perfil);
 

@@ -58,7 +58,13 @@ public class AdministrarModulo {
     public void nuevoModulo(){        
         if(getModuloSeleccionado().getModulo() != null){
             if(geteJBServicioModulo().buscarModuloByModulo(getModuloSeleccionado().getModulo()) == null){               
-                geteJBServicioModulo().create(getModuloSeleccionado());
+                                
+                Integer idModulo = geteJBServicioModulo().createAndGetKey(getModuloSeleccionado());      
+            
+                if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
+                    getServicioPermiso().adicionarPermisosModulo(idModulo, getServicioPermiso().getListaPermisosSeleccionados());                
+                }                              
+                
                 inicializarVariables();
                 //LOGGER.info("nuevo Modulo");
                 Mensaje.agregarMensajeGrowlInfo("Exito!", "Nuevo Modulo agregado.");

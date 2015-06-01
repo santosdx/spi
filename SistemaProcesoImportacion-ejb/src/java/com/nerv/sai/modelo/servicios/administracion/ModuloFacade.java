@@ -28,6 +28,26 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
     public ModuloFacade() {
         super(Modulo.class);
     }
+
+    /**
+     * Método que permite crear un registro en la entidad modulo y retorna el
+     * id o llave con el cual se ingreso a la base de datos ese registro.
+     * En caso de error, u otra inconsistencia, retornara -1.
+     * @param modulo
+     * @return 
+     */
+    @Override
+    public Integer createAndGetKey(Modulo modulo) {        
+        Integer resultado = -1;
+        try {
+            em.persist(modulo);
+            em.flush();
+            resultado = modulo.getId();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } 
+        return resultado;
+    }
     
     @Override
     public Modulo buscarModuloByModulo(String modulo) {        

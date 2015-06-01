@@ -12,8 +12,9 @@
             <f:facet name="header">
                 <p:outputLabel value="Lista de Modulos" style="display: block; width: 100%; text-align: left;"/>
             </f:facet>
-            <p:commandLink update="#{ccFormModuloId}" title="Detalle..." styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-                <f:setPropertyActionListener value="#{modulo}" target="#{MbAdministrarModulo.moduloSeleccionado}" />
+            <p:commandLink update="#{ccFormModuloId}" title="Detalle..." actionListener="#{MbAdministrarModulo.seleccionarPerfil(modulo)}"
+                           styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                <!--f:setPropertyActionListener value="#{modulo}" target="#{MbAdministrarModulo.moduloSeleccionado}" /-->
             </p:commandLink>        
             <p:outputLabel value="#{modulo.modulo} "/>
             <!--p:outputLabel value="- #{modulo.descripcion}"/-->      
